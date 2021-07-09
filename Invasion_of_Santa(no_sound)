@@ -1,0 +1,772 @@
+##
+# THE INVASION OF SANTA
+#
+# @author: Saillesh
+# @date: 12/16/2019
+# @course: ICS3UC
+
+# Import a library of functions called 'pygame'
+import pygame
+import random
+
+
+# Initialize the game engine
+pygame.init()
+
+# Define some colors
+BLACK = (0, 0, 0)
+ORANGE = (255,100,10)
+WHITE = (255, 255, 255)
+BLUE = (50, 0, 255)
+GREEN = (100, 255, 100)
+RED = (255, 0, 10)
+SKY_BLUE = (0,255,255)
+LIGHT_GRAY = (200,200,200)
+LIGHT_ORANGE =(255,100,100)
+DARK_GRAY = (50,50,50)
+YELLOW = (255,255,0)
+BROWN = (156,102,31)
+SKINC = (255,228,196)
+GREEEN = (0,100,00)
+GOLD = (255,200,0)
+scene = 0
+
+# Set the height and width of the screen
+size = (1250, 800)
+screen = pygame.display.set_mode(size)
+
+pygame.display.set_caption("Invasion of Santa")
+
+#list for snow falling
+snow = []
+
+for i in range(300):
+    x = random.randrange(0, 1250)
+    y = random.randrange(0, 800)
+    snow.append([x, y])
+
+##defined designes for backround and classes for charaters
+#Backround for level 1
+
+
+def backround():
+    #Designe for christmas tree
+    pygame.draw.rect(screen, BROWN, [500,500, 50, 400],)
+    pygame.draw.polygon(screen,GREEN,[[520, 300], [400, 650], [650, 650]], )
+
+
+
+    pygame.draw.rect(screen, BROWN, [0, 750, 1250, 700],)
+    pygame.draw.rect(screen, WHITE,[0,750,1250,10])
+
+#Backround for level 2
+def  backround2():
+
+    pygame.draw.ellipse(screen,WHITE, [0,600,500,600],)
+    pygame.draw.ellipse(screen,WHITE, [660,600, 500,600],)
+    pygame.draw.rect(screen, BROWN, [0, 750, 1250, 700],)
+    pygame.draw.rect(screen, BLACK, [0, 750, 1250, 700],5)
+
+
+
+
+
+    #Candy cane
+    for x_offset in range(4, 1250, 100):
+
+        pygame.draw.rect(screen, RED, [90+ x_offset, 670, 10, 80],)
+        pygame.draw.rect(screen, RED, [65+ x_offset, 660, 40, 10],)
+        pygame.draw.rect(screen, RED, [65+ x_offset, 660, 10, 30],)
+
+
+        pygame.draw.rect(screen, WHITE, [85+ x_offset , 660, 5 , 10],)
+        pygame.draw.rect(screen, WHITE, [75 + x_offset, 660, 5 , 10],)
+        pygame.draw.rect(screen, WHITE, [65+ x_offset , 670, 10 , 5],)
+
+        pygame.draw.rect(screen, WHITE, [90+ x_offset , 670 , 10 , 5],)
+        pygame.draw.rect(screen, WHITE, [90 + x_offset, 690, 10 , 5],)
+        pygame.draw.rect(screen, WHITE, [90+ x_offset , 710, 10 , 5],)
+        pygame.draw.rect(screen, WHITE, [90 + x_offset, 730, 10 , 5],)
+        pygame.draw.rect(screen, WHITE, [90+ x_offset , 750, 10 , 5],)
+
+
+        pygame.draw.rect(screen, BLACK,[100+ x_offset, 660, 5, 90],)
+        pygame.draw.rect(screen, BLACK, [85+ x_offset, 670, 5, 80],)
+        pygame.draw.rect(screen, BLACK, [75+ x_offset, 670, 15, 5],)
+        pygame.draw.rect(screen, BLACK, [75+ x_offset, 670, 5, 15],)
+        pygame.draw.rect(screen, BLACK, [65+ x_offset, 655, 35, 5],)
+        pygame.draw.rect(screen, BLACK, [60+ x_offset, 660, 5, 25],)
+        pygame.draw.rect(screen, BLACK, [65+ x_offset, 685, 10, 5],)
+        pygame.draw.rect(screen, BLACK, [90+ x_offset, 750, 10, 5],)
+
+
+# backround for level 3
+def  backround3():
+    pygame.draw.circle(screen,YELLOW, [625, 400], 200)
+
+
+
+    pygame.draw.rect(screen, LIGHT_GRAY, [0, 750, 1250, 700],)
+    pygame.draw.rect(screen, WHITE, [0, 750, 1250, 700],5)
+
+    #Present drawing
+    for  x_offset in range(4, 1250, 500):
+        pygame.draw.rect(screen, ORANGE, [0+ x_offset, 550,200, 200],)
+        pygame.draw.rect(screen,GREEEN, [75+ x_offset, 550,50, 200],)
+        pygame.draw.rect(screen,RED, [75+ x_offset, 550,50, 200],9)
+        pygame.draw.rect(screen,GREEEN, [35+ x_offset, 520,130, 30],)
+        pygame.draw.rect(screen,RED, [35+ x_offset, 520,130, 30],9)
+        pygame.draw.rect(screen,GREEEN, [0+ x_offset, 490,70, 30],)
+        pygame.draw.rect(screen,RED, [0+ x_offset, 490,70, 30],9)
+        pygame.draw.rect(screen,GREEEN, [120+ x_offset, 490,70, 30],)
+        pygame.draw.rect(screen,RED, [120+ x_offset, 490,70, 30],9)
+        pygame.draw.rect(screen,GREEEN, [0+ x_offset, 620,200, 50],)
+        pygame.draw.rect(screen,RED, [0+ x_offset, 620,200, 50],9)
+
+
+
+
+
+
+
+
+
+
+
+
+
+def sleigh(screen,slayx,slayy):
+    pygame.draw.rect(screen, YELLOW, [slayx, slayy, 160, 5], ) #(80, 260)
+    pygame.draw.rect(screen,GOLD, [slayx, slayy+5, 160, 5], ) #(80,265)
+    pygame.draw.rect(screen,GOLD, [slayx+160, slayy, 10, 5], ) #(240, 260)
+    pygame.draw.rect(screen,YELLOW, [slayx+160, slayy-5, 10, 5], )#240  255
+    pygame.draw.rect(screen,YELLOW, [slayx+160, slayy-10, 10, 5], )#240 250
+    pygame.draw.rect(screen,GOLD, [slayx+150, slayy-10, 10, 5], )# 230 250
+    pygame.draw.rect(screen,YELLOW, [slayx+150, slayy-15, 10, 5], )#230  245
+    pygame.draw.rect(screen,GOLD, [slayx+130, slayy-15, 20, 5], )# 210  245
+    pygame.draw.rect(screen,YELLOW, [slayx+130, slayy-20, 20, 5], )#210  240
+    pygame.draw.rect(screen,YELLOW, [slayx+125, slayy-15, 10, 5], )#205  245
+    pygame.draw.rect(screen,GOLD, [slayx+125, slayy-10, 10, 5], )#205
+    pygame.draw.rect(screen,GOLD, [slayx+20, slayy-5, 10, 5], )#100
+    pygame.draw.rect(screen,GOLD, [slayx+90, slayy-5, 10, 5], )#170
+    pygame.draw.rect(screen,GOLD, [slayx, slayy-10, 110, 7], )#80
+    pygame.draw.rect(screen,RED, [slayx, slayy-15, 110, 7], )#80
+    pygame.draw.rect(screen,RED, [slayx-20, slayy-20, 80, 7], )#60
+    pygame.draw.rect(screen,RED, [slayx-40, slayy-30, 80, 10], )#40
+    pygame.draw.rect(screen,RED, [slayx-40, slayy-45, 10, 20], )#40
+    pygame.draw.rect(screen,YELLOW, [slayx-30, slayy-50, 5, 20], )#50
+    pygame.draw.rect(screen,YELLOW, [slayx-45, slayy-50, 5, 35], )#35
+    pygame.draw.rect(screen,YELLOW, [slayx-45, slayy-50, 20, 5], )#35
+    pygame.draw.rect(screen,YELLOW, [slayx-45, slayy-20, 25, 5], )#35
+    pygame.draw.rect(screen,YELLOW, [slayx-20, slayy-20, 5, 10], )#60
+    pygame.draw.rect(screen,YELLOW, [slayx-20, slayy-15, 20, 5], )#60
+    pygame.draw.rect(screen,YELLOW, [slayx-5, slayy-10, 5, 5], )#75
+    pygame.draw.rect(screen,YELLOW, [slayx-25, slayy-35, 70, 5], )#55
+    pygame.draw.rect(screen,YELLOW, [slayx+40, slayy-35, 5, 15], )#120
+    pygame.draw.rect(screen,YELLOW, [slayx+40, slayy-25, 25, 5], )#120
+    pygame.draw.rect(screen,YELLOW, [slayx+60, slayy-25, 5, 10], )#140
+    pygame.draw.rect(screen,YELLOW, [slayx+60, slayy-20, 55, 5], )#140
+    pygame.draw.rect(screen,YELLOW, [slayx+110, slayy-20, 5, 15], )#190
+
+
+##CLasses
+
+# designe fro golden trumpet
+
+class Prize():
+    def __init__(self):
+        self.x = 0
+        self.y = 0
+        self.height = 0
+        self.width = 0
+        self.goldenp = pygame.Rect(self.x +490,self.y +400,self.width +60, self.height +5)
+
+    def move (self):
+        self.change_x = 5
+        self.change_y = 5
+
+        self.goldenp = pygame.Rect(self.x +490,self.y +400,self.width+ 60, self.height +5)
+
+    def draw(self,screen):
+
+        pygame.draw.rect(screen, YELLOW, [self.x + 490,self.y +400, self.width +60,self.height +5], )
+        pygame.draw.rect(screen, GOLD, [self.x +490, self.y +405, self.width +60,self.height +5], )
+        pygame.draw.rect(screen, YELLOW, [self.x +550, self.y +395,self.width +5,self.height +20], )
+        pygame.draw.rect(screen, YELLOW, [self.x +555,self.y +390,self.width +5,self.height+ 30], )
+        pygame.draw.rect(screen, YELLOW, [self.x +540,self.y +410,self.width +5,self.height +10], )
+        pygame.draw.rect(screen, YELLOW, [self.x +505,self.y +415,self.width +35,self.height +5], )
+        pygame.draw.rect(screen, YELLOW, [self.x +500,self.y +410, self.width +5,self.height +10], )
+        pygame.draw.rect(screen, GOLD, [self.x +510,self.y +395,self.width +5,self.height +30], )
+        pygame.draw.rect(screen, GOLD, [self.x+ 520,self.y +395,self.width+ 5,self.height +30], )
+        pygame.draw.rect(screen, GOLD, [self.x +530,self.y +395,self.width+ 5,self.height +30], )
+        pygame.draw.rect(screen, LIGHT_GRAY, [self.x +480,self.y +403,self.width +10,self.height +5], )
+        pygame.draw.rect(screen, LIGHT_GRAY, [self.x +475,self.y +395,self.width +5,self.height +20], )
+
+
+
+
+prize_List = []
+trumpet = Prize()
+trumpet.y = random.randint(100,300)
+trumpet.x = random.randint (100,1000)
+prize_List.append(trumpet)
+
+
+
+class Villain():
+    def __init__(self):
+        self.x = 113
+        self.y = 235
+        self.height = 5
+        self.width = 5
+        self.elfhit = pygame.Rect(self.x-13, self.y-45,self.width+25,self.height+15)
+
+        #rectangle movement
+        self.change_x = 5
+        self.change_y = 0
+
+        self.color = [0,0,0]
+        self.hitbox = (self.x-33,self.y-45,self.x+8,y+15)
+
+    def move(self):
+        self.x += self.change_x
+        self.y += self.change_y
+        self.elfhit = pygame.Rect(self.x-13, self.y-45,self.width+25,self.height+15)
+
+
+
+    #Drawing
+    def draw(self, screen):
+        pygame.draw.rect(screen, WHITE, [self.x-13, self.y-35,self.width+25,self.height+25])#(100,200,30,30)
+        pygame.draw.rect(screen, SKINC, [self.x-8, self.y-35,self.width+15,self.height+15])#(105,200,20,20)
+        pygame.draw.rect(screen, BLACK, [self.x,self.y-25,self.width,self.height])
+        pygame.draw.rect(screen, BLACK, [self.x+8,self.y-25,self.width,self.height])
+        pygame.draw.rect(screen, SKINC, [self.x-8, self.y-12,self.width+15,self.height])#(105,223,20,5)
+        pygame.draw.rect(screen, RED, [self.x-13, self.y-45,self.width+25,self.height+15])#(100,190,30,20)
+        pygame.draw.rect(screen, WHITE, [self.x-23, self.y-45,self.width+5,self.height+5])#(90,190,10,10)
+        pygame.draw.rect(screen, WHITE, [self.x-33, self.y-45,self.width+5,self.height+5])#(80,190,10,10)
+        pygame.draw.rect(screen, RED, [self.x-13, self.y-5,self.width+25,self.height+25])#(100,230,30,30)
+        pygame.draw.rect(screen, WHITE, [self.x, self.y,self.width,self.height]) #(113,235,5,5)
+        pygame.draw.rect(screen, WHITE, [self.x, self.y+10,self.width,self.height])#(113, 245, 5,5)
+        pygame.draw.rect(screen, BLACK, [self.x-13, self.y+15,self.width+25,self.height])#(100,250,30,5)
+        pygame.draw.rect(screen, BLACK, (self.elfhit))
+
+santa = Villain()
+
+
+#Inherat attributes from Villan Class
+class Elf(Villain):
+
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, WHITE, [self.x-13, self.y-35,self.width+25,self.height+25])#(100,200,30,30)
+        pygame.draw.rect(screen, SKINC, [self.x-8, self.y-35,self.width+15,self.height+15])#(105,200,20,20)
+        pygame.draw.rect(screen, BLACK, [self.x,self.y-25,self.width,self.height])
+        pygame.draw.rect(screen, BLACK, [self.x+8,self.y-25,self.width,self.height])
+        pygame.draw.rect(screen, SKINC, [self.x-8, self.y-12,self.width+15,self.height])#(105,223,20,5)
+        pygame.draw.rect(screen, self.color, [self.x-13, self.y-45,self.width+25,self.height+15])#(100,190,30,20)
+        pygame.draw.rect(screen, WHITE, [self.x-23, self.y-45,self.width+5,self.height+5])#(90,190,10,10)
+        pygame.draw.rect(screen, WHITE, [self.x-33, self.y-45,self.width+5,self.height+5])#(80,190,10,10)
+        pygame.draw.rect(screen,self.color, [self.x-13, self.y-5,self.width+25,self.height+25])#(100,230,30,30)
+        pygame.draw.rect(screen, WHITE, [self.x, self.y,self.width,self.height]) #(113,235,5,5)
+        pygame.draw.rect(screen, WHITE, [self.x, self.y+10,self.width,self.height])#(113, 245, 5,5)
+        pygame.draw.rect(screen, BLACK, [self.x-13, self.y+15,self.width+25,self.height])#(100,250,30,5)
+        pygame.draw.rect(screen, BLACK, (self.elfhit))
+
+
+# List to creat multiple elfs/change attributes (Bots)
+
+elf_List = []
+
+for i in range(12):
+    elf = Elf()
+    elf.x = random.randint(-1250,0)
+    elf.y = random.randint(600,750)
+    elf.change_x = random.randint(1,3)
+
+    r = random.randint(0,255)
+    b = random.randint(0,255)
+    g = random.randint(0,255)
+    elf.color = [r,g,b]
+    elf_List.append(elf)
+
+elf_List2 = []
+for i in range(12):
+    elf = Elf()
+    elf.x = random.randint(-1250,0)
+    elf.y = random.randint(600,720)
+    elf.change_x = random.randint(1,3)
+
+    r = random.randint(0,255)
+    b = random.randint(0,255)
+    g = random.randint(0,255)
+    elf.color = [r,g,b]
+    elf_List2.append(elf)
+
+
+elf_List3 = []
+for i in range(12):
+    elf = Elf()
+    elf.x = random.randint(-1250,0)
+    elf.y = random.randint(600,750)
+    elf.change_x = random.randint(1,3)
+
+    r = random.randint(0,255)
+    b = random.randint(0,255)
+    g = random.randint(0,255)
+    elf.color = [r,g,b]
+    elf_List3.append(elf)
+
+class Hero():
+    def __init__(self):
+        self.x = 50
+        self.y = 700
+        self.height = 5
+        self.width = 5
+
+        self.x_speed = 5
+        self.change_y = 0
+        self.hero_hitbox  = pygame.Rect(self.x-13, self.y-35,self.width+25,self.height+25)
+        self.hero_foot =(self.x-10, self.y+47,self.width+20,self.height)
+        self.color = [0,0,0]
+
+    def move(self):
+        self.x += self.x_speed
+        self.y += self.change_y
+        self.hero_hitbox  = pygame.Rect(self.x-13, self.y-35,self.width+25,self.height+25)
+        self.hero_foot =(self.x-10, self.y+47,self.width+20,self.height)
+
+
+    def draw(self, screen):
+        pygame.draw.rect(screen, BLACK, [self.x-13, self.y-35,self.width+25,self.height+25])
+        pygame.draw.rect(screen, YELLOW, [self.x-5,self.y-25,self.width+2,self.height-3])
+        pygame.draw.rect(screen, YELLOW, [self.x+5,self.y-25,self.width+2,self.height-3])
+        pygame.draw.rect(screen, BLACK, [self.x-7, self.y-5,self.width+15,self.height+25])
+        pygame.draw.line(screen, BLACK, [self.x-2, self.y+25], [self.x-2,self.y + 50],5)
+        pygame.draw.line(screen, BLACK, [self.x+8, self.y+25], [self.x+8,self.y + 50],5)
+        pygame.draw.rect(screen, BLACK, [self.x-10, self.y+47,self.width+20,self.height])
+
+
+ninja_List = []
+
+ninja = Hero()
+
+
+ninja_List.append(ninja)
+
+
+def drawScene0():
+    # Intro
+    font = pygame.font.SysFont("syncopate", 72)
+    subfont = pygame.font.SysFont("syncopate", 32)
+    startMsg = font.render("Mission Trumpet ", True, (255, 0, 0))
+    SecMsg = subfont.render ("Jump = Hold and Release Up Key" , True, (55,0,0))
+    thirdMsg = subfont.render ("Move Left = Left Key" , True, (55,0,0))
+    fourthMsg = subfont.render ("Move Right = Right Key" , True, (55,0,0))
+    gameinfo = subfont.render ("Twas the Night before Christmas, and Santa was NOT ready. He broke into YOUR home and stole your prized trumpet.",True, (55,0,0))
+    gameinfo2 = subfont.render ("Little does he know he's messing with the wrong high-flying musician...",True, (55,0,0))
+    gameinfo3 = subfont.render ("Defeat the elves and eventually their boss to reclaim your instrument and to extract revenge!", True, (55,0,0))
+
+
+    pygame.draw.rect(screen, GREEN, [0,0,1250,800], )
+    screen.blit(startMsg,(400, 50))
+    screen.blit(SecMsg,(50, 350))
+    screen.blit(thirdMsg,(50, 500))
+    screen.blit(fourthMsg,(50, 650))
+    screen.blit(gameinfo, (0,150))
+    screen.blit(gameinfo2, (200,175))
+    screen.blit(gameinfo3, (100,225))
+
+
+def drawScene1(screen,slayx,slayy):
+
+    pygame.draw.rect(screen, BLUE, [0,0,1250,800], 0)
+
+    for i in range(len(snow)):
+
+        # Draw the snow flake
+        pygame.draw.circle(screen, WHITE, snow[i], 2)
+
+        # Move the snow flake down one pixel
+        snow[i][1] += 2
+
+        # If the snow flake has moved off the bottom of the screen
+        if snow[i][1] > 800:
+            # Reset it just above the top
+            y = random.randrange(-50, -10)
+            snow[i][1] = y
+            # Give it a new x position
+            x = random.randrange(0, 1250)
+            snow[i][0] = x
+
+
+
+
+    backround()
+    santa.move()
+    santa.draw(screen)
+    sleigh(screen,slayx,slayy)
+    if santa.x > 1250:
+
+        santa.x = 0
+
+    ninja.draw(screen)
+    if ninja.x > 1250:
+        ninja.x = 0
+
+    for elf in elf_List:
+        elf.move()
+        elf.draw(screen)
+        if elf.x>1250:
+            elf.x=0
+
+
+slayx = 80
+slayy = 260
+
+def drawScene2():
+    font = pygame.font.SysFont("comicsansms", 70)
+    startMsg = font.render("LEVEL: 2", True, (0, 128, 0))
+    pygame.draw.rect(screen, BLUE, [0,0,1250,800], 0)
+    screen.blit(startMsg,(100, 100))
+
+    # Draw an ellipse, using a rectangle as the outside boundaries
+
+    for i in range(len(snow)):
+
+        # Draw the snow flake
+        pygame.draw.circle(screen, WHITE, snow[i], 2)
+
+        # Move the snow flake down one pixel
+        snow[i][1] += 2
+
+        # If the snow flake has moved off the bottom of the screen
+        if snow[i][1] > 800:
+            # Reset it just above the top
+            y = random.randrange(-50, -10)
+            snow[i][1] = y
+            # Give it a new x position
+            x = random.randrange(0, 1250)
+            snow[i][0] = x
+
+    backround2()
+
+
+
+    for elf in elf_List2:
+        elf.move()
+        elf.draw(screen)
+        if elf.x > 1250:
+            elf.x = 0
+
+    santa.move()
+    santa.draw(screen)
+
+    sleigh(screen,slayx,slayy)
+    if santa.x > 1250:
+        santa.x = 0
+
+    ninja.draw(screen)
+    if ninja.x > 1250:
+        ninja.x = 0
+
+
+
+slayx = 80
+slayy = 260
+
+
+def drawScene3():
+    font = pygame.font.SysFont("comicsansms", 70)
+    startMsg = font.render("LEVEL: 3 get the Trumpet", True, (0, 128, 0))
+    pygame.draw.rect(screen, BLUE, [0,0,1250,800], 0)
+    screen.blit(startMsg,(100, 100))
+
+    # Draw an ellipse, using a rectangle as the outside boundaries
+
+    for i in range(len(snow)):
+
+        # Draw the snow flake
+        pygame.draw.circle(screen, WHITE, snow[i], 2)
+
+        # Move the snow flake down one pixel
+        snow[i][1] += 2
+
+        # If the snow flake has moved off the bottom of the screen
+        if snow[i][1] > 800:
+            # Reset it just above the top
+            y = random.randrange(-50, -10)
+            snow[i][1] = y
+            # Give it a new x position
+            x = random.randrange(0, 1250)
+            snow[i][0] = x
+
+    santa.move()
+    santa.draw(screen)
+    backround3()
+
+
+    sleigh(screen,slayx,slayy)
+    if santa.x > 1250:
+
+        santa.x = 0
+
+    ninja.draw(screen)
+    if ninja.x > 1250:
+        ninja.x = 0
+
+
+    for elf in elf_List3:
+        elf.move()
+        elf.draw(screen)
+        if elf.x > 1250:
+            elf.x = 0
+
+
+slayx = 80
+slayy = 260
+
+
+
+
+def Winsscreen():
+    # Intro
+    font = pygame.font.SysFont("syncopate", 72)
+    subfont = pygame.font.SysFont("syncopate", 32)
+    startMsg = font.render("CONGRATS ", True, (255, 0, 0))
+    SecMsg = font.render ("You Win" , True, (55,0,0))
+
+
+    pygame.draw.rect(screen, GREEN, [0,0,1250,800], )
+    screen.blit(startMsg,(400, 50))
+    screen.blit(SecMsg,(50, 350))
+
+
+
+
+def deathscreen():
+    # Intro
+    font = pygame.font.SysFont("syncopate", 72)
+    subfont = pygame.font.SysFont("syncopate", 32)
+    startMsg = font.render("You were Defeated. ", True, (0, 0, 0))
+    SecMsg = font.render ("You Lose" , True, (0,0,0))
+
+
+
+    pygame.draw.rect(screen, RED, [0,0,1250,800], )
+    screen.blit(startMsg,(400, 50))
+    screen.blit(SecMsg,(500, 200))
+
+
+
+## Main Game Loop
+
+done = False
+
+clock = pygame.time.Clock()
+x_speed = 0
+y_speed = 0
+while not done:
+    # Handle CONTROL
+    for event in pygame.event.get(): # User did something
+        if event.type == pygame.QUIT: # If user clicked close
+            done = True # Flag that we are done so we exit this loop
+
+        elif event.type == pygame.KEYDOWN:
+            if event.key == pygame.K_z:
+                scene = scene +1
+                if scene == 6:
+                    scene =0
+
+            elif event.key == pygame.K_LEFT:
+                x_speed = -3
+            elif event.key == pygame.K_RIGHT:
+                x_speed = 3
+
+            if event.key == pygame.K_UP:
+                y_speed = -5
+
+
+        elif event.type == pygame.KEYUP:
+            if event.key == pygame.K_LEFT or event.key == pygame.K_RIGHT:
+                x_speed = 0
+            if event.key == pygame.K_UP:
+                y_speed = 5
+## Scene 0
+    if (scene == 0):
+        drawScene0()
+## Scene 1
+    elif (scene == 1):
+        drawScene1(screen,slayx,slayy)
+        slayx +=5
+        if slayx>1250:
+            slayx=0
+
+
+        for ninja in ninja_List:
+
+            ninja.draw(screen)
+            ninja.hero_hitbox  = pygame.Rect(ninja.x-13, ninja.y-35,ninja.width+25,ninja.height+25)
+            ninja.hero_foot = pygame.Rect(ninja.x-10, ninja.y+47,ninja.width+20,ninja.height)
+            ninja.x+= x_speed
+            ninja.y+= y_speed
+
+
+
+
+# when gravity
+        if ninja.y > 700:
+            y_speed = 0
+
+        elif ninja.y < 500:
+            y_speed = 5
+
+
+        for elf in elf_List:
+            elf.draw(screen)
+            elf.move()
+            elf.elfhit = pygame.Rect(elf.x-13, elf.y-45,elf.width+25,elf.height+15)
+
+
+
+
+
+            if ninja.hero_foot.colliderect(elf.elfhit):
+
+                
+                elf_List.remove(elf)
+
+
+            elif ninja.hero_hitbox.colliderect(elf.elfhit):
+
+                scene = scene +4
+
+
+
+
+## Scene 2
+    elif (scene == 2):
+        drawScene2()
+        slayx +=5
+        if slayx>1250:
+            slayx=0
+
+        ninja.draw(screen)
+        ninja.hero_hitbox  = pygame.Rect(ninja.x-13, ninja.y-35,ninja.width+25,ninja.height+25)
+        ninja.hero_foot = pygame.Rect(ninja.x-10, ninja.y+47,ninja.width+20,ninja.height)
+        ninja.x+= x_speed
+        ninja.y+= y_speed
+
+
+
+
+# when gravity
+        if ninja.y > 700:
+            y_speed = 0
+
+        elif ninja.y < 500:
+            y_speed = 5
+
+
+        for elf in elf_List2:
+            elf.draw(screen)
+            elf.move()
+            elf.elfhit = pygame.Rect(elf.x-13, elf.y-45,elf.width+25,elf.height+15)
+
+
+            if ninja.hero_foot.colliderect(elf.elfhit):
+
+                
+                elf_List2.remove(elf)
+
+
+            elif ninja.hero_hitbox.colliderect(elf.elfhit):
+
+                scene = scene +3
+
+
+
+
+
+
+
+
+
+
+
+
+## Scene 3
+    elif (scene == 3):
+      #MOVEMENTS FOR THE PLATFORMS
+
+
+        drawScene3()
+
+
+        slayx +=5
+
+        if slayx>1250:
+            slayx=0
+
+        ninja.draw(screen)
+        ninja.hero_hitbox  = pygame.Rect(ninja.x-13, ninja.y-35,ninja.width+25,ninja.height+25)
+        ninja.hero_foot = pygame.Rect(ninja.x-10, ninja.y+47,ninja.width+20,ninja.height)
+        ninja.x+= x_speed
+        ninja.y+= y_speed
+
+
+
+
+        trumpet.draw(screen)
+        trumpet.move()
+        trumpet.goldenp = pygame.Rect(trumpet.x + 490, trumpet.y +400,trumpet.width + 60,trumpet.height +5)
+
+        if ninja.y > 700:
+            y_speed = 0
+
+        elif ninja.y < 500:
+            y_speed = 5
+
+
+        for elf in elf_List3:
+            elf.draw(screen)
+            elf.move()
+            elf.elfhit = pygame.Rect(elf.x-13, elf.y-45,elf.width+25,elf.height+15)
+
+
+
+            if ninja.hero_foot.colliderect(elf.elfhit):
+
+                
+                elf_List3.remove(elf)
+
+
+            elif ninja.hero_hitbox.colliderect(elf.elfhit):
+
+                scene = scene +2
+
+            elif trumpet.goldenp.colliderect(ninja.hero_hitbox):
+
+
+                raise SystemExit("You win!")
+
+
+## Winning Screen
+
+
+    elif (scene == 4):
+        Winsscreen()
+
+ ## deathscreen
+    elif (scene == 5):
+        deathscreen()
+
+
+
+
+
+    pygame.display.flip()
+
+    clock.tick(60)
+
+pygame.quit()
